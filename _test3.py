@@ -1,0 +1,2 @@
+﻿content = """hello"""
+print(content)

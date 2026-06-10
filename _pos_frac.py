@@ -1,0 +1,10 @@
+﻿fp=r"F:/codex/设计心泉数字心理学app/xinquan-app/src/components/HeartChart.jsx"
+hc=open(fp,"r",encoding="utf-8").read()
+hc=hc.replace("y=\"348\"","y=\"308\"")
+hc=hc.replace("y1=\"350\" y2=\"350\"","y1=\"314\" y2=\"314\"")
+hc=hc.replace("y=\"365\"","y=\"332\"")
+hc=hc.replace("y=\"378\"","y=\"345\"")
+hc=hc.replace("x=\"22\"","x=\"40\"")
+hc=hc.replace("x1=\"16\" x2=\"52\"","x1=\"32\" x2=\"60\"")
+open(fp,"w",encoding="utf-8").write(hc)
+print("positions updated")
