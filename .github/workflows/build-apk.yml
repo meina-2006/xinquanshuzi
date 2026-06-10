@@ -23,11 +23,8 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-     - name: Install dependencies
+      - name: Install dependencies
         run: npm install
-
-      - name: Debug - check files
-        run: ls -la src/ && cat package.json | head -5
 
       - name: Build web app
         run: npm run build
