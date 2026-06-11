@@ -25,7 +25,7 @@ export default function ChinaMap({ selectedCity, data, onCityChange }) {
         <span><span style={{background:'#D8A0AD',borderRadius:'50%',width:8,height:8,display:'inline-block',marginRight:4}} /> 避用</span>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', padding: 10 }}>
-        <svg viewBox="0 0 320 350" style={{ width: '100%', maxWidth: 320, height: 'auto', display: 'block' }}>
+        <svg viewBox="0 0 320 350" preserveAspectRatio="xMidYMid meet" style={{ width: '100%', maxWidth: 320, height: 350, display: 'block' }}>
           <rect x="0" y="0" width="320" height="350" fill="#faf5f0" rx="8" />
           <text x={CX} y={20} textAnchor="middle" fill="#D96B86" fontSize="14" fontWeight="bold">飞行图 · {city.name}</text>
           {[42, 82, 122].map(r => (
