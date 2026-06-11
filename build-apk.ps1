@@ -1,11 +1,11 @@
- # 心泉数字心理学 Android APK 打包脚本
+# 心泉密码 Android APK 打包脚本
  # 使用前请确保已安装：
  # 1. Java JDK 17+ (https://adoptium.net/)
  # 2. Android Studio + Android SDK 34
  # 3. 设置环境变量 JAVA_HOME 和 ANDROID_HOME
  
  Write-Host "========================================" -ForegroundColor Magenta
- Write-Host "  心泉数字心理学 · Android APK 打包" -ForegroundColor Magenta
+ Write-Host "  心泉密码 · Android APK 打包" -ForegroundColor Magenta
  Write-Host "========================================" -ForegroundColor Magenta
  Write-Host ""
  

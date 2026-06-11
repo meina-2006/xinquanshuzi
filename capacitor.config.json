@@ -1,6 +1,6 @@
 {
   "appId": "com.xinquan.numerology",
-  "appName": "心泉数字心理学",
+  "appName": "心泉密码",
    "webDir": "dist",
    "server": {
      "androidScheme": "https"

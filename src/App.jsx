@@ -11,10 +11,11 @@
  import { defaultCity } from './utils/cities';
  import './styles/theme.css';
  
- export default function App() {
-   const [year, setYear] = useState(1977);
-   const [month, setMonth] = useState(7);
-   const [day, setDay] = useState(28);
+export default function App() {
+   const now = new Date();
+   const [year, setYear] = useState(now.getFullYear());
+   const [month, setMonth] = useState(now.getMonth() + 1);
+   const [day, setDay] = useState(now.getDate());
    const [currentData, setCurrentData] = useState(null);
    const [activeTab, setActiveTab] = useState('calc');
    const [selectedCity, setSelectedCity] = useState(defaultCity);
