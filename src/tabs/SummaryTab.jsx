@@ -85,7 +85,7 @@ export default function SummaryTab({ data }) {
           marginTop: '16px', fontSize: '14px',
           color: '#D96B86', fontWeight: 700, textAlign: 'center'
         }}>
-          记住&mdash;&mdash;<span style={{ color: '#E6212A' }}>懂是爱的前提，修是生命的答案。</span>
+          记住&mdash;&mdash;<span style={{ color: 'var(--pink-deep)', fontSize: '18px', fontWeight: 700 }}>懂是爱的前提，修是生命的答案。</span>
         </p>
       </div>
     </div>

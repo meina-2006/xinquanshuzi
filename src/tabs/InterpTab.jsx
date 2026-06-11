@@ -19,8 +19,8 @@ export default function InterpTab({ data }) {
         <h4>{title}</h4>
         {tags.map((t, i) => (
           <div key={i} style={{marginBottom:'8px', padding:'8px 10px', background:'#fff', borderRadius:'8px', borderLeft:'4px solid #D96B86', boxShadow:'0 1px 4px rgba(217,107,134,0.08)'}}>
-            <span style={{display:'inline-block', background:'#FCE8EF', color:'#E6212A', padding:'2px 12px', borderRadius:'12px', fontWeight:700, fontSize:'14px', marginRight:'8px'}}>{t}</span>
-            <span style={{fontSize:'12px', color:'#555', lineHeight:'1.6'}}>{getCombinedMeaning(t)}</span>
+            <span style={{display:'inline-block', background:'#FCE8EF', color:'var(--text-primary)', padding:'2px 12px', borderRadius:'12px', fontWeight:700, fontSize:'14px', fontFamily:'var(--font-main)', marginRight:'8px'}}>{t}</span>
+            <span style={{fontSize:'14px', color:'#555', lineHeight:'1.6'}}>{getCombinedMeaning(t)}</span>
           </div>
         ))}
       </div>
