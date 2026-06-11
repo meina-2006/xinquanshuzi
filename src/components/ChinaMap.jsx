@@ -1,111 +1,63 @@
 ﻿import { cities, defaultCity, directions } from '../utils/cities';
 import '../styles/theme.css';
 
-function pt(cx, cy, r, angleDeg) {
-  const rad = angleDeg * Math.PI / 180;
+const CX = 160, CY = 175;
+function pt(cx, cy, r, a) {
+  const rad = a * Math.PI / 180;
   return { x: cx + r * Math.sin(rad), y: cy - r * Math.cos(rad) };
 }
 
-const CX = 160, CY = 175;
-const RINGS = [42, 82, 122];
-const LINE_R = 130;
-const LABEL_R_DIR = 148;
-const LABEL_R_VAL = 162;
-
 export default function ChinaMap({ selectedCity, data, onCityChange }) {
-  const currentCity = selectedCity || defaultCity;
-
+  const city = selectedCity || defaultCity;
   return (
     <div>
       <div className="city-selector">
-        <label>📍 所在地</label>
-        <select
-          value={currentCity.name}
-          onChange={e => {
-            const city = cities.find(c => c.name === e.target.value) || defaultCity;
-            onCityChange(city);
-          }}
-        >
-          {cities.map(c => (
-            <option key={c.name} value={c.name}>{c.name}</option>
-          ))}
+        <label>所在地</label>
+        <select value={city.name} onChange={e => {
+          onCityChange(cities.find(c => c.name === e.target.value) || defaultCity);
+        }}>
+          {cities.map(c => <option key={c.name} value={c.name}>{c.name}</option>)}
         </select>
       </div>
-      <div className="map-legend">
-        <span><span className="legend-dot positive" /> 吉位 +</span>
-        <span><span className="legend-dot negative" /> 平位</span>
-        <span><span className="legend-dot avoid" /> 避用</span>
+      <div className="map-legend" style={{ justifyContent: 'center', gap: 16, display: 'flex', fontSize: 10, margin: '8px 0' }}>
+        <span><span style={{background:'#E6212A',borderRadius:'50%',width:8,height:8,display:'inline-block',marginRight:4}} /> 吉位 +</span>
+        <span><span style={{background:'#BBB',borderRadius:'50%',width:8,height:8,display:'inline-block',marginRight:4}} /> 平位</span>
+        <span><span style={{background:'#D8A0AD',borderRadius:'50%',width:8,height:8,display:'inline-block',marginRight:4}} /> 避用</span>
       </div>
-      <div className="map-container" style={{ padding: '10px', display: 'flex', justifyContent: 'center' }}>
-        <svg viewBox="0 0 320 350" style={{ width: '100%', maxWidth: '320px', height: 'auto' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', padding: 10 }}>
+        <svg viewBox="0 0 320 350" style={{ width: '100%', maxWidth: 320, height: 'auto', display: 'block' }}>
           <rect x="0" y="0" width="320" height="350" fill="#faf5f0" rx="8" />
-          {RINGS.map(r => (
-            <circle key={r} cx={CX} cy={CY} r={r}
-              fill="none" stroke="#F0E4E8" strokeWidth="0.8" strokeDasharray="4,6" />
+          <text x={CX} y={20} textAnchor="middle" fill="#D96B86" fontSize="14" fontWeight="bold">飞行图 · {city.name}</text>
+          {[42, 82, 122].map(r => (
+            <circle cx={CX} cy={CY} r={r} fill="none" stroke="#F0E4E8" strokeWidth="1" strokeDasharray="4,6" />
           ))}
           {data && directions.map((_, i) => {
-            const angle = i * 30;
-            const end = pt(CX, CY, LINE_R, angle);
-            const val = data.finDir[i];
-            let color, sw, dash;
-            if (val === '避') {
-              color = '#D8A0AD'; sw = 1.5; dash = '5,4';
-            } else if (typeof val === 'number' && val > 0 || String(val).startsWith('+')) {
-              color = '#E6212A'; sw = 2; dash = '';
-            } else {
-              color = '#BBBBBB'; sw = 1; dash = '4,4';
-            }
-            return (
-              <line key={i}
-                x1={CX} y1={CY} x2={end.x} y2={end.y}
-                stroke={color} strokeWidth={sw} strokeDasharray={dash || null} opacity="0.7" />
-            );
+            const a = i * 30;
+            const end = pt(CX, CY, 130, a);
+            const v = data.finDir[i];
+            let color = '#BBB';
+            if (v === '避') color = '#D8A0AD'; else if (typeof v === 'number' && v > 0) color = '#E6212A';
+            return <line key={'l'+i} x1={CX} y1={CY} x2={end.x} y2={end.y} stroke={color} strokeWidth={1.5} opacity="0.7" />;
           })}
           {data && directions.map((d, i) => {
-            const angle = i * 30;
-            const p = pt(CX, CY, LABEL_R_DIR, angle);
-            return (
-              <text key={'d' + i} x={p.x} y={p.y}
-                textAnchor="middle" dominantBaseline="central"
-                className="compass-label compass-label-dir">{d}</text>
-            );
+            const p = pt(CX, CY, 148, i * 30);
+            return <text key={'d'+i} x={p.x} y={p.y} textAnchor="middle" dominantBaseline="central" fill="#D96B86" fontSize="10" fontWeight="bold" fontFamily="sans-serif">{d}</text>;
           })}
           {data && directions.map((_, i) => {
-            const angle = i * 30;
-            const p = pt(CX, CY, LABEL_R_VAL, angle);
-            const val = data.finDir[i];
-            let cls = 'compass-label compass-label-val-negative';
-            let display = String(val);
-            if (val === '避') {
-              cls = 'compass-label compass-label-val-avoid';
-            } else if (typeof val === 'number' && val > 0) {
-              cls = 'compass-label compass-label-val-positive';
-              display = '+' + val;
-            }
-            return (
-              <text key={'v' + i} x={p.x} y={p.y}
-                textAnchor="middle" dominantBaseline="central"
-                className={cls}>{display}</text>
-            );
+            const p = pt(CX, CY, 163, i * 30);
+            const v = data.finDir[i];
+            let color = '#BBB';
+            let label = String(v);
+            if (v === '避') { color = '#D8A0AD'; }
+            else if (typeof v === 'number' && v > 0) { color = '#E6212A'; label = '+' + v; }
+            return <text key={'v'+i} x={p.x} y={p.y} textAnchor="middle" dominantBaseline="central" fill={color} fontSize="13" fontWeight="bold" fontFamily="sans-serif">{label}</text>;
           })}
-          <circle cx={CX} cy={CY} r="6" fill="#D96B86" fillOpacity="0.25" stroke="#D96B86" strokeWidth="1.5" />
-          <circle cx={CX} cy={CY} r="2.5" fill="#C9A96E" fillOpacity="0.8" />
-          <text x={CX} y={CY - 14} textAnchor="middle" dominantBaseline="middle"
-            fontFamily="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"
-            fontSize="12" fontWeight="700" fill="#C75A74"
-            style={{ textShadow: '0 0 4px #fff, 0 0 4px #fff' }}>
-            {currentCity.name}
-          </text>
+          <circle cx={CX} cy={CY} r="5" fill="#D96B86" fillOpacity="0.3" />
+          <circle cx={CX} cy={CY} r="2" fill="#C9A96E" />
+          <text x={CX} y={CY - 14} textAnchor="middle" dominantBaseline="middle" fill="#C75A74" fontSize="12" fontWeight="bold" fontFamily="sans-serif">{city.name}</text>
         </svg>
       </div>
-      {data && (
-        <p style={{
-          textAlign: 'center', fontSize: '10px',
-          color: '#A8969A', marginTop: '0px'
-        }}>
-          {data.y}年{data.m}月{data.d}日 · 属{data.zodiac} · 原点{currentCity.name}
-        </p>
-      )}
+      {data && <p style={{textAlign:'center',fontSize:10,color:'#A8969A',margin:0}}>{data.y}年{data.m}月{data.d}日 · 属{data.zodiac} · 原点{city.name}</p>}
     </div>
   );
 }
