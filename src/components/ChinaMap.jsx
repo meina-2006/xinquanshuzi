@@ -137,15 +137,22 @@
    return null;
  }
  
- function MapController({ center, data }) {
-   const map = useMap();
-   useEffect(() => {
-     if (center) {
-       map.flyTo([center.lat, center.lng], 8, { duration: 1 });
-     }
-   }, [center, map]);
-   return <CompassLayer center={center} data={data} />;
- }
+function MapController({ center, data }) {
+  const map = useMap();
+  // 修复Tab切换时地图容器尺寸计算问题
+  useEffect(() => {
+    const timer = setTimeout(() => map.invalidateSize(), 150);
+    const ro = new ResizeObserver(() => map.invalidateSize());
+    ro.observe(map.getContainer());
+    return () => { clearTimeout(timer); ro.disconnect(); };
+  }, [map]);
+  useEffect(() => {
+    if (center) {
+      map.flyTo([center.lat, center.lng], 8, { duration: 1 });
+    }
+  }, [center, map]);
+  return <CompassLayer center={center} data={data} />;
+}
  
  export default function ChinaMap({ selectedCity, data, onCityChange }) {
    const currentCity = selectedCity || defaultCity;
