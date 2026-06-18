@@ -31,6 +31,7 @@ export default function ChinaMap({ selectedCity, data, onCityChange }) {
         <div style={{ position:'absolute', top:12, left:0, width:'100%', textAlign:'center', color:'#C75A74', fontSize:15, fontWeight:'bold', fontFamily:'sans-serif' }}>
           飞行图 · {city.name}
         </div>
+        <div style={{ transform:'scale(0.9)', transformOrigin:'center center', width:'100%', height:'100%' }}>
 
         {[42, 82, 122].map(r => (
           <div key={r} style={{
@@ -104,6 +105,7 @@ export default function ChinaMap({ selectedCity, data, onCityChange }) {
           fontFamily:'sans-serif', whiteSpace:'nowrap',
           pointerEvents:'none'
         }}>{city.name}</div>
+        </div>
       </div>
 
       {data && <p style={{textAlign:'center',fontSize:10,color:'#A8969A',margin:0}}>{data.y}年{data.m}月{data.d}日 · 属{data.zodiac} · 原点{city.name}</p>}

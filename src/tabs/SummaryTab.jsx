@@ -1,5 +1,24 @@
 ﻿import { mainQualities, flowAdvice, sixDimension, missingText, missingAdvice } from '../utils/calculator';
+import { useState } from 'react';
 import '../styles/theme.css';
+
+const FOOTER_QUOTES = [
+  '懂是爱的前提 修是生命的答案',
+  '懂是爱的前提 修是生命的符号',
+  '起心动念皆是因 当下所受皆是果',
+  '降低期待值 增加感恩度',
+  '心若不动 风奈我何',
+  '水低为海 人低为王',
+  '上善若水',
+  '聚是一团火 散是满天星',
+  '心若不伤 岁月无恙',
+  '你眼中的别人才是真正的自己',
+  '口乃福祸之门',
+  '爱是治愈一切的良药',
+  '智者无忧 智者不惑',
+  '静能生慧'
+];
+
 
 export default function SummaryTab({ data }) {
   if (!data) return null;
@@ -16,6 +35,7 @@ export default function SummaryTab({ data }) {
   );
   const avoid = d.dirs.filter((_, i) => d.finDir[i] === '避');
   const dim = sixDimension[d.s3] || {};
+  const [footerQuote] = useState(() => FOOTER_QUOTES[Math.floor(Math.random() * FOOTER_QUOTES.length)]);
 
   return (
     <div>
@@ -83,9 +103,9 @@ export default function SummaryTab({ data }) {
 
         <p style={{
           marginTop: '16px', fontSize: '14px',
-          color: '#D96B86', fontWeight: 700, textAlign: 'center'
+          color: '#D96B86', fontWeight: 700, textAlign: 'center', lineHeight: 1.6
         }}>
-          记住&mdash;&mdash;<span style={{ color: 'var(--pink-deep)', fontSize: '18px', fontWeight: 700 }}>懂是爱的前提，修是生命的答案。</span>
+          记住——<span style={{ color: 'var(--pink-deep)', fontSize: '18px', fontWeight: 700 }}>{footerQuote}</span>
         </p>
       </div>
     </div>

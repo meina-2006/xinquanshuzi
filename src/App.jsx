@@ -1,27 +1,27 @@
- import { useState } from 'react';
- import Header from './components/Header';
- import InputSection from './components/InputSection';
- import TabBar from './components/TabBar';
- import CalcTab from './tabs/CalcTab';
- import FlowTab from './tabs/FlowTab';
- import FlightTab from './tabs/FlightTab';
- import InterpTab from './tabs/InterpTab';
- import SummaryTab from './tabs/SummaryTab';
- import { calcAll } from './utils/calculator';
- import { defaultCity } from './utils/cities';
- import './styles/theme.css';
- 
+import { useState } from 'react';
+import Header from './components/Header';
+import InputSection from './components/InputSection';
+import TabBar from './components/TabBar';
+import CalcTab from './tabs/CalcTab';
+import FlowTab from './tabs/FlowTab';
+import FlightTab from './tabs/FlightTab';
+import InterpTab from './tabs/InterpTab';
+import SummaryTab from './tabs/SummaryTab';
+import { calcAll } from './utils/calculator';
+import { defaultCity } from './utils/cities';
+import './styles/theme.css';
+
 export default function App() {
-   const now = new Date();
-   const [year, setYear] = useState(now.getFullYear());
-   const [month, setMonth] = useState(now.getMonth() + 1);
-   const [day, setDay] = useState(now.getDate());
-   const [currentData, setCurrentData] = useState(null);
-   const [activeTab, setActiveTab] = useState('calc');
-   const [selectedCity, setSelectedCity] = useState(defaultCity);
- 
-   const handleCalculate = () => {
-     if (!year || !month || !day) return;
+  const now = new Date();
+  const [year, setYear] = useState(now.getFullYear());
+  const [month, setMonth] = useState(now.getMonth() + 1);
+  const [day, setDay] = useState(now.getDate());
+  const [currentData, setCurrentData] = useState(null);
+  const [activeTab, setActiveTab] = useState('calc');
+  const [selectedCity, setSelectedCity] = useState(defaultCity);
+
+  const handleCalculate = () => {
+    if (!year || !month || !day) return;
      const data = calcAll(Number(year), month, day);
      setCurrentData(data);
      setActiveTab('calc');
@@ -81,9 +81,9 @@ export default function App() {
        <div className="content-area">
          {renderTabContent()}
        </div>
-       <div className="app-footer">
-         生命蜕变 · 幸福重生
-       </div>
-     </div>
-   );
- }
+      <div className="app-footer">
+        生命蜕变 · 幸福重生
+      </div>
+    </div>
+  );
+}
