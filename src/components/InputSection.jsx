@@ -14,7 +14,7 @@ export default function InputSection({ year, month, day, onYearChange, onMonthCh
       <select className="input-field-select" value={month} onChange={e => onMonthChange(Number(e.target.value))}>
         {months.map(m => <option key={m} value={m}>{m}月</option>)}
       </select>
-      <select className="input-field-select" value={day} onChange={e => onDayChange(Number(e.target.value))}>
+      <select className="input-field-select" style={{width:72}} value={day} onChange={e => onDayChange(Number(e.target.value))}>
         {days.map(d => <option key={d} value={d}>{d}日</option>)}
       </select>
       <div style={{width:'100%', textAlign:'center', marginTop:'8px'}}>

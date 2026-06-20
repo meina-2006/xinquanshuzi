@@ -46,8 +46,7 @@ export default function CalcTab({ data }) {
       <div className="card-grid">
         {card('起始数字', d.start)}
         {card('主性格', d.s3)}
-        {card('坐镇联合数字', String(d.s1)+String(d.s2)+String(d.s3))}
-        {card('属相', d.zodiac)}
+        {card('坐镇数字', String(d.s1)+String(d.s2)+String(d.s3))}
       </div>
       <div className="section-title">心形图</div>
       <HeartChart
