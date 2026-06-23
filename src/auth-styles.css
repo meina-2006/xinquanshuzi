@@ -1,0 +1,55 @@
+﻿.auth-input-wrap {
+  position: relative;
+}
+
+.auth-input-pwd {
+  padding-right: 40px !important;
+}
+
+.auth-eye {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  z-index: 10;
+  max-height: 160px;
+  overflow-y: auto;
+  margin-top: 2px;
+}
+
+.auth-suggestion {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.auth-suggestion:last-child {
+  border-bottom: none;
+}
+
+.auth-suggestion:hover {
+  background: var(--pink-subtle);
+}

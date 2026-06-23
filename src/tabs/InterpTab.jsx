@@ -1,4 +1,5 @@
-﻿import { startText, mainText, flowText, missingText, sixDimension, missingAdvice, getCombinedMeaning } from '../utils/calculator';
+﻿import { numTypes, numToType } from "../utils/numberTypes";
+import { startText, mainText, missingText, sixDimension, missingAdvice, getCombinedMeaning } from '../utils/calculator';
 import '../styles/theme.css';
 
 export default function InterpTab({ data }) {
@@ -29,12 +30,12 @@ export default function InterpTab({ data }) {
 
   return (
     <div>
-      <div className="section-title">起始数字 &#183; {d.start}</div>
+      <div className="section-title">起始数字 · {d.start}</div>
       <div className="interpret">
         <p>{startText[d.start] || ''}</p>
       </div>
 
-      <div className="section-title">主性格 &#183; {d.s3}</div>
+      <div className="section-title">主性格 · {d.s3}</div>
       <div className="interpret">
         <p dangerouslySetInnerHTML={{ __html: mainText[d.s3] || '' }} />
       </div>
@@ -64,7 +65,7 @@ export default function InterpTab({ data }) {
         </p>
       </div>
 
-      <div className="section-title">缺失数字{missing.length ? ' &#183; ' + missing.join('、') : ' &#183; 无'}</div>
+      <div className="section-title">缺失数字{missing.length ? ' · ' + missing.join('、') : ' · 无'}</div>
       <div className="interpret">
         {missing.length === 0 ? (
           <p>
@@ -81,9 +82,21 @@ export default function InterpTab({ data }) {
         )}
       </div>
 
-      <div className="section-title">流年 {d.cy} &#183; 主性格 {d.f_s3}</div>
+      
+      <div className="section-title">数字类型</div>
       <div className="interpret">
-        <p>{flowText[d.f_s3] || ''}</p>
+        <p>你的主性格 {d.s3} 属于 <span className="hl">{numTypes[numToType[d.s3]]?.name || ""}</span></p>
+        <p>{numTypes[numToType[d.s3]]?.desc || ""}</p>
+        <p style={{fontSize:"13px",lineHeight:1.7,color:"#6A5A5A",marginTop:"8px"}}>{numTypes[numToType[d.s3]]?.detail || ""}</p>
+      </div>
+
+      <div className="section-title">阴阳能量</div>
+      <div className="interpret">
+        <p>心形图中：<span className="hl">阳数 {d.yangCount}个</span> · <span className="hl">阴数 {d.yinCount}个</span></p>
+        {d.yinYang === "yang" && <p>你的阳性能量偏强，做事积极主动，有主见不拖泥带水。<br/>{/* 性别判断后续再加 */}如果心形图中阳性数字较多，说明你是一个行动派。<br/>{/* 对于女性：容易成为"女汉子"，温柔是需要修行的功课。 */}</p>}
+        {d.yinYang === "yin" && <p>你的阴性能量偏强，含蓄内敛，细腻敏感，包容力强。<br/>如果心形图中阴性数字较多，你是一个温和体贴的人。</p>}
+        {d.yinYang === "balance" && <p>你的阴阳能量平衡，刚柔并济，既能果断行动也能温柔包容，是难得的好状态。</p>}
+        <p style={{marginTop:"12px",textAlign:"center",color:"#D96B86",fontWeight:700}}>懂是爱的前提 —— 理解了另一半的数字能量，就不会过多要求对方改变</p>
       </div>
     </div>
   );

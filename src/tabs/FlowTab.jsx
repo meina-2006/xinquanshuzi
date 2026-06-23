@@ -1,5 +1,6 @@
  import HeartChart from '../components/HeartChart';
- import '../styles/theme.css';
+ import { flowText } from '../utils/calculator';
+import '../styles/theme.css';
  
  function card(label, value) {
    return (
@@ -27,6 +28,11 @@
          tr_l={d.f_tr_l} tr_r={d.f_tr_r} mr={d.f_mr}
          bot={d.f_bot}
        />
+
+      <div className="section-title">流年 {d.cy} · 解读</div>
+      <div className="interpret">
+        {flowText[d.f_s3] ? flowText[d.f_s3].split("\n\n").map((p,i) => <p key={i}>{p}</p>) : ''}
+      </div>
      </div>
    );
  }

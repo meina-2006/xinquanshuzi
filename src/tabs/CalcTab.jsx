@@ -47,6 +47,9 @@ export default function CalcTab({ data }) {
         {card('起始数字', d.start)}
         {card('主性格', d.s3)}
         {card('坐镇数字', String(d.s1)+String(d.s2)+String(d.s3))}
+        {card('内心密码', d.innerCode)}
+        {card('外心密码', d.outerCode)}
+        {card('潜意识密码', d.subconsciousCode)}
       </div>
       <div className="section-title">心形图</div>
       <HeartChart
